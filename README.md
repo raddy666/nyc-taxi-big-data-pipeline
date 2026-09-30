@@ -154,4 +154,3 @@ Chengdu Suncape Data Co., Ltd. (March 2025 – September 2025)
 ## 🏅 Internship Outcome
 
 - Certificate of Completion with **excellent evaluation**
-- Successfully delivered production-grade big data analytics system
