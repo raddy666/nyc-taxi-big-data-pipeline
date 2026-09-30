@@ -58,7 +58,7 @@ Prediction Layer (ChatGPT + Historical Analysis)
 - Automated data flow from ingestion to analytics
 
 ### 📈 Analytics & Visualization
-- 30+ interactive visualizations in Apache Zeppelin
+- 30+ interactive visualizations in Apache Zeppelin (20 of 30 built individually)
 - Geospatial heatmaps for taxi demand hotspots
 - Congestion pattern analysis using Hive SQL queries
 - Time-based and region-based demand trends
@@ -67,7 +67,7 @@ Prediction Layer (ChatGPT + Historical Analysis)
 Built prediction bot using OpenAI API to query historical patterns:
 - Input: Location + time query (natural language)
 - Processing: Hive aggregation of historical data
-- Output: Estimated wait time with 85% accuracy (validated on 2013 holdout data)
+- Output: Returns estimated wait-time and congestion level via historical Hive aggregation.
 - Interface: Command-line chat interface
 
 **Example Query:**
