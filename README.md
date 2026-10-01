@@ -147,7 +147,7 @@ Built prediction bot using OpenAI API to query historical patterns:
 
 **MD Tahmid Hamim**  
 Software Engineering Intern – Big Data Analysis Team  
-Chengdu Suncape Data Co., Ltd. (March 2025 – September 2025)
+Chengdu Suncape Data Co., Ltd. (March 2025 – June 2025)
 
 ---
 
