@@ -1,20 +1,20 @@
 # 🚕 Taxi Big Data Analysis & Prediction System
 
-A **distributed big data analytics and prediction system** designed to analyze large-scale taxi transportation data and provide **demand hotspot analysis, congestion insights, and real-time wait time prediction**.
+A **distributed big data analytics and prediction system** designed to analyze large-scale taxi transportation data and provide **demand hotspot analysis, congestion insights, and trip-duration prediction**.
 
-This project was developed during my **Software Engineering Internship (Big Data Analysis Team)** and covers **end-to-end data engineering**, from raw data ingestion to distributed processing, analytics, visualization, and AI-assisted prediction.
+This team project was developed during an internship at **Chengdu Suncape Data Co., Ltd.** (Big Data Analysis Team) and covers **end-to-end data engineering**, from raw data ingestion to distributed processing, analytics, visualization, and AI-assisted prediction.
 
 ---
 
 ## 📌 Project Overview
 
-The system processes large volumes of taxi trip data using a **Hadoop-based distributed environment**, performs analytics with **Spark and Hive**, visualizes insights via **Apache Zeppelin**, and exposes predictions through a **ChatGPT-integrated assistant**.
+The system processes large volumes of taxi trip data using a **Hadoop-based distributed environment**, performs analytics with **Spark and Hive**, visualizes insights via **Apache Zeppelin**, and exposes trip-duration predictions through a **command-line chat assistant** (Random Forest model with a GPT-4 fallback).
 
 Key goals:
 - Scalable data processing on distributed infrastructure
 - Reliable ETL pipeline for transportation datasets
 - Actionable analytics for urban mobility
-- Real-time prediction using historical patterns
+- Trip-duration prediction from historical patterns
 
 ---
 ### 📊 Dataset Scale
@@ -32,7 +32,7 @@ The dataset captures multi-year urban transportation patterns at city scale, ena
 ```text
 Raw Taxi Data (Parquet)
         ↓
-ETL Pipeline (PySpark)
+ETL Pipeline (pandas, Dask, PySpark)
         ↓
 HDFS Distributed Storage
         ↓
@@ -40,7 +40,7 @@ Apache Hive (SQL Analytics)
         ↓
 Apache Zeppelin (Visualization)
         ↓
-Prediction Layer (ChatGPT + Historical Analysis)
+Prediction Layer (Random Forest model + GPT-4 chat bot)
 ```
 ---
 
@@ -53,37 +53,35 @@ Prediction Layer (ChatGPT + Historical Analysis)
 
 ### 🔄 ETL Pipeline
 - Parquet → CSV data transformation
-- Data cleaning and normalization using PySpark
+- Data cleaning and normalization using pandas and PySpark
 - Structured storage in MySQL for downstream access
 - Automated data flow from ingestion to analytics
 
 ### 📈 Analytics & Visualization
-- 30+ interactive visualizations in Apache Zeppelin (20 of 30 built individually)
+- 30+ interactive visualizations in Apache Zeppelin (PySpark)
 - Geospatial heatmaps for taxi demand hotspots
 - Congestion pattern analysis using Hive SQL queries
 - Time-based and region-based demand trends
 
 ### 🤖 Prediction & AI Integration
-Built prediction bot using OpenAI API to query historical patterns:
-- Input: Location + time query (natural language)
-- Processing: Hive aggregation of historical data
-- Output: Returns estimated wait-time and congestion level via historical Hive aggregation.
-- Interface: Command-line chat interface
+A command-line chat bot (`query.py`) answers natural-language questions about taxi trips:
+- Feature extraction: regular expressions pull the day of the week, pickup hour (AM/PM) and taxi type (yellow, green, fhvhv) out of the question
+- Prediction: a Random Forest regressor (scikit-learn, 100 trees, trained in `train_model.py` on pickup day, pickup hour and taxi type across the yellow, green, FHV and FHVHV datasets) returns the predicted trip duration in minutes
+- Fallback: questions that are not trip-duration requests are forwarded to the OpenAI GPT-4 API
+- Interface: command-line chat loop
 
 **Example Query:**
-> "What's the taxi wait time in Manhattan at 6 PM on Friday?"
-> **Response:** "Based on historical data, average wait time is 4.2 minutes with high demand."
+> "How long will a yellow taxi trip take on Friday at 6 PM?"
+> **Response:** "The predicted trip duration is *N* minutes."
 
 ---
 
-## 🧠 Engineering Responsibilities
+## 🧩 Project Components
 
-- System architecture design and end-to-end pipeline ownership
-- Hadoop cluster administration on Linux
-- ETL pipeline design and implementation
-- Spark and Hive query optimization
-- Design and implementation of analytical dashboards for decision support
-- AI-assisted prediction system integration
+- Distributed storage and processing on a 3-node Hadoop cluster (Linux)
+- ETL pipeline for yellow, green, FHV and FHVHV trip data
+- Spark and Hive analytics with Apache Zeppelin dashboards
+- Random Forest trip-duration model with a chat interface
 
 ---
 
@@ -94,10 +92,11 @@ Built prediction bot using OpenAI API to query historical patterns:
 - **Query Engine:** Apache Hive
 - **Visualization:** Apache Zeppelin
 - **Database:** MySQL
-- **Programming:** Python (Pandas, PySpark)
+- **Programming:** Python (pandas, PySpark, Dask)
+- **Machine Learning:** scikit-learn (Random Forest)
 - **Platform:** Linux
 - **IDE:** PyCharm
-- **AI Integration:** OpenAI API (ChatGPT)
+- **AI Integration:** OpenAI API (GPT-4)
 
 ---
 
@@ -117,10 +116,10 @@ Built prediction bot using OpenAI API to query historical patterns:
 
 ### Typical Workflow
 1. Load raw taxi data into HDFS
-2. Run PySpark ETL scripts
+2. Run the ETL scripts
 3. Execute Hive queries for analytics
 4. Visualize results in Zeppelin
-5. Query predictions via AI assistant
+5. Ask the chat bot for trip-duration predictions
 
 ---
 
@@ -128,7 +127,7 @@ Built prediction bot using OpenAI API to query historical patterns:
 
 - Identifying taxi demand hotspots by time and location
 - Detecting congestion-prone zones in urban areas
-- Estimating taxi wait times at query-time
+- Estimating trip durations by day, hour and taxi type
 - Supporting data-driven transportation planning
 
 ---
@@ -143,14 +142,6 @@ Built prediction bot using OpenAI API to query historical patterns:
 
 ---
 
-## 👤 Author
+## 👥 Team
 
-**MD Tahmid Hamim**  
-Software Engineering Intern – Big Data Analysis Team  
-Chengdu Suncape Data Co., Ltd. (March 2025 – June 2025)
-
----
-
-## 🏅 Internship Outcome
-
-- Certificate of Completion with **excellent evaluation**
+Team project developed at Chengdu Suncape Data Co., Ltd. (March 2025 – June 2025). See the repository's commit history for individual contributions.
